@@ -12,12 +12,21 @@ android {
 
     defaultConfig {
         applicationId = "com.example.horoscapp"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.horoscapp.CustomTestRunner"
+    }
+
+    packaging {
+        resources.excludes.addAll(
+            listOf(
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE-notice.md",
+        )
+        )
     }
 
     buildTypes {
@@ -50,10 +59,12 @@ android {
         viewBinding = true
         buildConfig = true
     }
+
 }
 
 dependencies {
     implementation("androidx.camera:camera-view:1.3.2")
+    androidTestImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     val navVersion = "2.7.7"
     val camerax_version = "1.3.2"
 
@@ -87,9 +98,17 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
 
-
+    //UITesting
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.48")
+    androidTestImplementation("androidx.fragment:fragment-testing:1.6.1")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.48")
+
+
+
 }
 
 kapt {
